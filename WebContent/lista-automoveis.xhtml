@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+				xmlns:ui="http://java.sun.com/jsf/facelets"
+  				xmlns:h="http://java.sun.com/jsf/html" 
+	  			xmlns:p="http://primefaces.org/ui"
+	  			template="/WEB-INF/template.xhtml">
+
+	<ui:define name="pageTitle">
+		Listagem de automóveis
+	</ui:define>
+
+	<ui:define name="content">
+		<h:form prependId="false">	        
+			<p:dataTable value="#{automovelBean.automoveis}" var="automovel" border="1">
+				<p:column headerText="Id">
+					<h:outputText value="#{automovel.id}"/>
+				</p:column>
+				<p:column headerText="Marca">
+					<h:outputText value="#{automovel.marca.nome}"/>
+				</p:column>
+				<p:column headerText="Modelo">
+					<h:outputText value="#{automovel.modelo}"/>
+				</p:column>
+				<p:column headerText="Ano de fabricação">
+					<h:outputText value="#{automovel.anoFabricacao}"/>
+				</p:column>
+				<p:column headerText="Ano do Modelo">
+					<h:outputText value="#{automovel.anoModelo}"/>
+				</p:column>
+				<p:column headerText="Observação">
+					<h:outputText value="#{automovel.observacao}"/>
+				</p:column>
+				<p:column headerText="Ações">
+					<p:commandButton value="Excluir" update="@form growl" actionListener="#{automovelBean.excluir(automovel)}"/>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

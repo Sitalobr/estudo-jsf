@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+				xmlns:ui="http://java.sun.com/jsf/facelets"
+  				xmlns:h="http://java.sun.com/jsf/html" 
+	  			xmlns:p="http://primefaces.org/ui"
+	  			template="/WEB-INF/template.xhtml">
+
+	<ui:define name="pageTitle">
+		Listagem de marcas
+	</ui:define>
+
+	<ui:define name="content">
+		<h:form prependId="false">	        
+			<p:dataTable value="#{marcaBean.marcas}" var="marca" border="1">
+				<p:column headerText="Id">
+					<h:outputText value="#{marca.id}"/>
+				</p:column>
+				<p:column headerText="Nome">
+					<h:outputText value="#{marca.nome}"/>
+				</p:column>
+				<p:column headerText="Ações">
+					<p:commandButton value="Excluir" update="@form growl" actionListener="#{marcaBean.excluir(marca)}"/>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

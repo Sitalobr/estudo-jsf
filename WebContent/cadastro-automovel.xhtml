@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+				xmlns:f="http://java.sun.com/jsf/core"
+				xmlns:ui="http://java.sun.com/jsf/facelets"
+  				xmlns:h="http://java.sun.com/jsf/html" 
+	  			xmlns:p="http://primefaces.org/ui"
+	  			template="/WEB-INF/template.xhtml">
+
+	<ui:define name="pageTitle">
+		Cadastro de automóveis
+	</ui:define>
+
+	<ui:define name="content">
+		<h:form prependId="false" enctype="multipart/form-data">		
+			<p:panel id="panel" header="Cadastro de automóveis">
+				<h:panelGrid columns="2">
+					<p:outputLabel for="marca" value="Marca:"/>
+					<p:selectOneMenu id="marca" value="#{automovelBean.automovel.marca}" converter="marcaConverter">
+			            <f:selectItem itemLabel="Selecione a marca" itemValue="" />
+			            <f:selectItems value="#{automovelBean.marcas}" var="marca" itemValue="#{marca}" itemLabel="#{marca.nome}"/>
+			        </p:selectOneMenu>
+			        
+					<p:outputLabel for="modelo" value="Modelo:"/>
+					<p:inputText id="modelo" value="#{automovelBean.automovel.modelo}"/>
+					
+					<p:outputLabel for="anoFabricacao" value="Ano de fabricação:"/>
+					<p:inputText id="anoFabricacao" value="#{automovelBean.automovel.anoFabricacao}"/>
+					
+					<p:outputLabel for="anoModelo" value="Ano do modelo:"/>
+					<p:inputText id="anoModelo" value="#{automovelBean.automovel.anoModelo}"/>
+					
+					<p:outputLabel for="observacao" value="Observação:"/>
+					<p:inputTextarea id="observacao" value="#{automovelBean.automovel.observacao}"/>
+					
+					<p:commandButton value="Salvar" update="@form growl" actionListener="#{automovelBean.salvar}"/>
+					
+				    <p:fileUpload fileUploadListener="#{uploadBean.upload}" 
+				    			  label="Anexe um arquivo" uploadLabel="Enviar" cancelLabel="Cancelar"
+				    			  allowTypes="/(\.|\/)(gif|jpe?g|png|pdf)$/"  
+				    			  invalidFileMessage="São permitidas somente imagens (gif, jpeg, jpg, png e pdf)" 
+				    			  sizeLimit="5242880" invalidSizeMessage="O tamanho máximo permitido é de 5mb."
+				    			  fileLimit="1" fileLimitMessage="Só é possível escolher 1 arquivos por vez." 
+				    			  multiple="false" auto="false" update="growl"/>
+				</h:panelGrid>
+			</p:panel>			
+		</h:form>
+	</ui:define>
+
+</ui:composition>
